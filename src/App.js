@@ -16,14 +16,12 @@ export default function App() {
   const episodes = seasons[selectedSeason] || [];
 
   useEffect(() => {
-    const getShow = () => {
     fetchShow()
-        .then(res => {
+        .then((res) => {
+          console.log(fetchShow())
           setShow(res.data);
           setSeasons(formatSeasons(res.data._embedded.episodes));
-        });
-    };
-    getShow();
+    });
   }, []);
 
   const handleSelect = e => {
@@ -35,7 +33,7 @@ export default function App() {
   }
   console.log(episodes)
   return (
-    <div className="App">
+    <div data-testid='episodes 'className="App">
       <img className="poster-img" src={show.image.original} alt={show.name} />
       <h1>{show.name}</h1>
       {parse(show.summary)}
